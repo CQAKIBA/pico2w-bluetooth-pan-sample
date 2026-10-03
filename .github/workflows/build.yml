@@ -1,0 +1,30 @@
+name: Build Pico 2 W PANU + APRS-IS UF2
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install compiler
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build gcc-arm-none-eabi libnewlib-arm-none-eabi python3 git
+      - name: Download Pico SDK and submodules
+        run: git clone --depth 1 --branch 2.3.1 --recurse-submodules --shallow-submodules https://github.com/raspberrypi/pico-sdk.git "$GITHUB_WORKSPACE/pico-sdk"
+      - name: Configure
+        run: cmake -S . -B build -G Ninja -DPICO_BOARD=pico2_w -DCMAKE_BUILD_TYPE=Release
+        env:
+          PICO_SDK_PATH: ${{ github.workspace }}/pico-sdk
+      - name: Build
+        run: cmake --build build -j 4
+      - name: Upload UF2 and ELF
+        uses: actions/upload-artifact@v4
+        with:
+          name: pico2w-bt-panu-uf2
+          path: |
+            build/pico2w_bt_pan_tether.uf2
+            build/pico2w_bt_pan_tether.elf
+          if-no-files-found: error

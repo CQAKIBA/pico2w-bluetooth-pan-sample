@@ -1,0 +1,14 @@
+/build/
+/cmake-build-*/
+/.cache/
+/.pico-sdk/
+/.vscode/
+/.idea/
+*.uf2
+*.elf
+*.bin
+*.hex
+*.map
+*.o
+*.obj
+*.log
