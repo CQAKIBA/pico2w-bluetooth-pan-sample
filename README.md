@@ -10,6 +10,33 @@ Use an Android phone's **Bluetooth tethering** to give a Pico 2 W an ordinary IP
 
 [日本語の説明 / Japanese README](README.ja.md)
 
+## Hardware and screenshots
+
+The GitHub Actions-built UF2 was also flashed onto a real **Pico 2 W** and successfully ran the complete Bluetooth PANU → DHCP → HTTP → APRS-IS demonstration (2026-10-04). Click any photo for the full-size image.
+
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <a href="images/serial-aprs-is.png"><img src="images/serial-aprs-is.png" alt="USB serial terminal showing live APRS-IS packets over Bluetooth PAN" width="440"></a><br>
+      <sub>Live APRS-IS packets in the USB serial terminal</sub>
+    </td>
+    <td width="50%" align="center">
+      <a href="images/pico2w-board.jpg"><img src="images/pico2w-board.jpg" alt="Raspberry Pi Pico 2 W test hardware" width="440"></a><br>
+      <sub>Raspberry Pi Pico 2 W test hardware</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="images/android-bluetooth.png"><img src="images/android-bluetooth.png" alt="Pico2W-PANU paired in Android Bluetooth settings" width="270"></a><br>
+      <sub>Paired Pico2W-PANU device</sub>
+    </td>
+    <td align="center">
+      <a href="images/android-tethering.png"><img src="images/android-tethering.png" alt="Android Bluetooth tethering turned on" width="270"></a><br>
+      <sub>Bluetooth tethering enabled on Android</sub>
+    </td>
+  </tr>
+</table>
+
 ## How it works
 
 ```text
@@ -54,7 +81,7 @@ cmake -S . -B build -G Ninja -DPICO_BOARD=pico2_w -DCMAKE_BUILD_TYPE=Release
 cmake --build build --parallel 4
 ```
 
-You need `PICO_SDK_PATH` pointing at SDK 2.3.1 with submodules, plus a suitable ARM toolchain and Ninja. A GitHub Actions workflow builds UF2 and ELF in the cloud after the source is pushed to your own repository. **That workflow has not yet been executed for this repackaged tree**; see its run results before releasing a binary.
+You need `PICO_SDK_PATH` pointing at SDK 2.3.1 with submodules, plus a suitable ARM toolchain and Ninja. A GitHub Actions workflow builds UF2 and ELF in the cloud after the source is pushed to your own repository. **The GitHub Actions build has completed successfully, and its resulting UF2 has been tested successfully on the Pico 2 W.** [See the successful build run](https://github.com/CQAKIBA/pico2w-bluetooth-pan-sample/actions/runs/37145502106).
 
 ## Serial status and controls
 

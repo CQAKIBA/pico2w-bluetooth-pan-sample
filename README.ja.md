@@ -6,6 +6,33 @@
 
 **実機確認環境：Pico 2 W、Pico SDK 2.3.1、Blackview BV9300（Android）。** 初回ペアリング、保存済みリンクキーによるPico単独リセット後の自動接続、BNEP、DHCP、HTTP、APRS-IS受信、およびスマホのBluetooth再有効化後の復旧まで確認しました。他のスマホや消費電力、長期間の安定性は未検証です。実機検証日：**2026年10月3〜4日**。
 
+## 動作写真・スクリーンショット
+
+GitHub Actionsで生成したUF2も、**Pico 2 Wの実機へ書き込んで**、Bluetooth PANU → DHCP → HTTP → APRS-ISの一連の動作に成功しました（2026年10月4日）。画像はクリックすると元の大きさで表示できます。
+
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <a href="images/serial-aprs-is.png"><img src="images/serial-aprs-is.png" alt="USBシリアル上に表示されたAPRS-ISのライブ受信ログ" width="440"></a><br>
+      <sub>USBシリアルに流れるAPRS-ISのライブパケット</sub>
+    </td>
+    <td width="50%" align="center">
+      <a href="images/pico2w-board.jpg"><img src="images/pico2w-board.jpg" alt="実機テストに使用したRaspberry Pi Pico 2 W" width="440"></a><br>
+      <sub>テストに使用したPico 2 W</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="images/android-bluetooth.png"><img src="images/android-bluetooth.png" alt="AndroidのBluetoothペア設定にあるPico2W-PANU" width="270"></a><br>
+      <sub>Android側のPico2W-PANUペア設定</sub>
+    </td>
+    <td align="center">
+      <a href="images/android-tethering.png"><img src="images/android-tethering.png" alt="AndroidのBluetoothテザリングがONになっている画面" width="270"></a><br>
+      <sub>BluetoothテザリングをONにした状態</sub>
+    </td>
+  </tr>
+</table>
+
 ## 動作の流れ
 
 ```text
@@ -58,6 +85,6 @@ USBシリアルで `s` + Enter は統計表示、`t` はHTTP/APRS再試験、`a`
 
 ## ビルド、利用条件
 
-- 手元でのコンパイルが難しい場合は、同梱のGitHub ActionsでUF2を生成できます。ただし公開整理版のワークフロー実行は未確認です。
+- 手元でのコンパイルが難しい場合は、同梱のGitHub ActionsでUF2を生成できます。GitHub Actionsの[ビルド成功結果](https://github.com/CQAKIBA/pico2w-bluetooth-pan-sample/actions/runs/37145502106)と、そのUF2を使った実機動作まで確認済みです。
 - サンプル本体とドキュメントはMITライセンス（`LICENSE`）です。著作権表記：`Copyright (c) 2026 Daisuke JA1UMW / CQAKIBA.TOKYO`。二次配布時は著作権表示とライセンス文を保持してください。Pico SDK、BTstack、lwIPの再配布条件はそれぞれ別途確認してください。
 - 一般公開時には、テスト時のスマホの実MACアドレスやペアリング情報を含むログを誤ってコミットしないようにしてください。
